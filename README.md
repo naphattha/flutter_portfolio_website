@@ -1,6 +1,9 @@
-# flutter_portfolio_website
+# Naphattha Portfolio Website
 
-A new Flutter project.
+A Personal Portfolio Built with Flutter for Web
+This project showcases the personal portfolio of Naphattha, beautifully crafted using the Flutter framework for a fast, responsive, and cross-platform web experience.
+
+It serves as a professional online presence to display projects, skills, and contact information.
 
 ## Getting Started
 
