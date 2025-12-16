@@ -5,8 +5,9 @@ class Styles{
   static const BoxDecoration gradientDecoration = BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.backgroundLight,
-              AppColors.backgroundDark,
+              AppColors.purpleSoft,
+              AppColors.purpleMid,
+              AppColors.purpleDark,
               ]
           )
   );

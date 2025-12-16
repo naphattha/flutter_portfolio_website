@@ -14,9 +14,10 @@ class AppColors{
 
   // BACKGROUND & TEXT COLORS (Backgrounds should be simple to make Gold/Pink stand out)
 
-  // BACKGROUND COLOR: สีพื้นหลัง (เน้นความเรียบหรู)
-  static const Color backgroundLight = Color(0xFFF5F5F5); // สีขาวเทาอ่อนมาก (เหมาะสำหรับ Light Theme)
-  static const Color backgroundDark = Color(0xFF1E1E1E); // สีเทาเข้มเกือบดำ (เหมาะสำหรับ Dark Theme)
+  // PURPLE BACKGROUND (Golden Experience Aura)
+  static const Color purpleDark = Color(0xFF1A102C);   // ม่วงดำลึก (Hero / Footer)
+  static const Color purpleMid = Color(0xFF2B1B3F);    // ม่วงเข้ม (Section)
+  static const Color purpleSoft = Color(0xFF3A2A52);   // ม่วงอ่อน (Card bg)
 
   // TEXT COLOR: สีตัวอักษร
   static const Color textDark = Color(0xFF212121);   // สีดำสนิท
