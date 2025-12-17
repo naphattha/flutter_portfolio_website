@@ -25,4 +25,17 @@ class AppColors{
 
   // SPECIAL (Hover, Button States)
   static const Color hoverEffect = primaryDark; // ใช้สีทองเข้มเมื่อเมาส์ชี้
+  
+  // CTA GOLD
+  static const Color goldCTA = Color(0xFFFFD54F);   // ทองสว่าง (ปุ่ม)
+  static const Color goldCTADark = Color(0xFFC9A000); // ทองเข้ม (icon / hover)
+  static const Color goldBorder = Color(0x66FFD700); // ขอบทองโปร่ง
+
+  static const Color purpleCTA = Color(0xFF2F1E45);
+  static const Color purpleBorder = Color(0x44FFD700);
+
+  static const Color gray100 = Color(0xFFF5F5F5); // Headline รอง
+  static const Color gray200 = Color(0xFFE0E0E0); // Body text
+  static const Color gray400 = Color(0xFFBDBDBD); // Caption / Hint
+  static const Color gray600 = Color(0xFF757575); // Disabled / Subtle
 }

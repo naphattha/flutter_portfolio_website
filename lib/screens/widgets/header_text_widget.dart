@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
+import 'package:flutter_portfolio_website/screens/widgets/Social_Section.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class HeaderTextWidget extends StatelessWidget {
@@ -16,24 +17,27 @@ class HeaderTextWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("I am Naphattha",style: TextStyle(fontSize: 35,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'Mali')),
-          GradientText("Web Developer+\nMobile Developer", colors: [
-            AppColors.accentDeep,
-            AppColors.primaryDark
+          Text("I am Naphattha",style: TextStyle(fontSize: 35,color: AppColors.primaryGold,fontWeight: FontWeight.bold,fontFamily: 'Mali')),
+          GradientText("Web Developer +\nMobile Developer", colors: [
+            AppColors.accentPink,
+            AppColors.accentDeep
           ],
           style: TextStyle(
-            fontSize: size.width*0.025,
+            fontSize: size.width*0.045,
             fontFamily: 'Mali',
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
           
           ),
           SizedBox(
             width: size.width*0.5,
             child: Text("I’m an aspiring mobile developer specializing in Flutter.\nI build mobile applications while continuously learning modern mobile development practices."
-            ,style: TextStyle(fontSize: 20,color: Colors.white,fontFamily: 'Mali')),
+            ,style: TextStyle(fontSize: 20,color: AppColors.gray200,fontFamily: 'Mali')),
           ),
-          
+  Container(
+    width: size.width*0.5,
+    child: SocialSection(),
+  )        
 
         ],
       ),
