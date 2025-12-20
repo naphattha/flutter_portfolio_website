@@ -12,8 +12,9 @@ class SocialSection extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10),
         height: 50,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          
           children: [
             
             DownloadCVButton(),

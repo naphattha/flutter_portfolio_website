@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
         if(constraints.maxWidth>950){
           return DesktopLayout();
         }
-        else if (constraints.maxWidth>600){
+        else if (constraints.maxWidth>450){
           return TabletLayout();
         }
         else{

@@ -35,11 +35,13 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                       children: [Row(
                         children: [
                           HeaderTextWidget(size:size,),
-                          SizedBox(height: 20,),
-                          //Social_large(size: size),
+                          
+                          
                         ],
-                        
-                      )],
+                      ),
+                      SizedBox(height: 20,),
+                      Social_large(size: size),
+                      ],
                       ),
                       Expanded(child: Container(
                        

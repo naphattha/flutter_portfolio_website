@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
-import 'package:flutter_portfolio_website/screens/widgets/Social_Section.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Social_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/download_cv_widget.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -35,11 +34,7 @@ class HeaderTextWidget extends StatelessWidget {
             width: size.width*0.5,
             child: Text("I’m an aspiring mobile developer specializing in Flutter.\nI build mobile applications while continuously learning modern mobile development practices."
             ,style: TextStyle(fontSize: 20,color: AppColors.gray200,fontFamily: 'Mali')),
-          ),
-          SizedBox(
-            width: size.width*0.5,
-            child: SocialSection(),
-          )        
+          )      
         ],
       ),
     );

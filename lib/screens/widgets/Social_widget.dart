@@ -8,6 +8,9 @@ class SocialWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+
       children: [
         Container(
           height: 40,
@@ -30,7 +33,7 @@ class SocialWidget extends StatelessWidget {
         ),
 
         ),
-        
+        const SizedBox(width: 10,),
         Container(
           height: 40,
           width: 40,

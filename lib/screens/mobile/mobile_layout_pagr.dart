@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio_website/constants/styles.dart';
+import 'package:flutter_portfolio_website/screens/tablet/tablet_layout_pagr.dart';
+import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
 
 class MobileLayout extends StatefulWidget {
   const MobileLayout({super.key});
@@ -10,9 +14,56 @@ class MobileLayout extends StatefulWidget {
 class _MobileLayoutState extends State<MobileLayout> {
   @override
   Widget build(BuildContext context) {
+    Size size=MediaQuery.of(context).size;
     return Scaffold(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: Styles.gradientDecoration,
 
-      backgroundColor: Colors.black,
+        child: SingleChildScrollView(
+
+          child: Container(
+            margin: EdgeInsets.symmetric( vertical: size.height * 0.1),
+            child: 
+            Column(
+                children: [
+                  Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [Row(
+                        children: [
+                          HeaderTextWidget(size:size,),
+                        ],
+                        
+                      ),
+                      SizedBox(height: 20,),
+                      Social_Tab(size: size),
+                      ],
+                      ),
+                      Expanded(
+                      child: Container(
+                       
+                        child: Column
+                          (
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RotatingImageContainer()
+                          ],
+                        ),
+                      ))
+                  ],
+              )
+            ]
+          ),)
+          )
+        )
     );
+   
   }
 }
