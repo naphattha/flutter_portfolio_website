@@ -14,7 +14,7 @@ class MobileLayout extends StatefulWidget {
 class _MobileLayoutState extends State<MobileLayout> {
   @override
   Widget build(BuildContext context) {
-    Size size=MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -22,13 +22,11 @@ class _MobileLayoutState extends State<MobileLayout> {
         decoration: Styles.gradientDecoration,
 
         child: SingleChildScrollView(
-
           child: Container(
-            margin: EdgeInsets.symmetric( vertical: size.height * 0.1),
-            child: 
-            Column(
-                children: [
-                  Row(
+            margin: EdgeInsets.symmetric(vertical: size.height * 0.1),
+            child: Column(
+              children: [
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,34 +34,27 @@ class _MobileLayoutState extends State<MobileLayout> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Row(
-                        children: [
-                          HeaderTextWidget(size:size,),
-                        ],
-                        
-                      ),
-                      SizedBox(height: 20,),
-                      Social_Tab(size: size),
-                      ],
-                      ),
-                      Expanded(
-                      child: Container(
-                       
-                        child: Column
-                          (
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RotatingImageContainer()
-                          ],
+                      children: [
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [RotatingImageContainer()],
+                          ),
                         ),
-                      ))
+                        SizedBox(height: 20),
+
+                        Row(children: [HeaderTextWidget(size: size)]),
+                        SizedBox(height: 20),
+                        Social_Tab(size: size),
+                      ],
+                    ),
                   ],
-              )
-            ]
-          ),)
-          )
-        )
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
-   
   }
 }

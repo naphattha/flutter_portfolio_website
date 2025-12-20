@@ -18,44 +18,41 @@ class SocialWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.purpleDark.withValues())
+            border: Border.all(color: AppColors.purpleDark.withValues()),
           ),
           child: Center(
-          child: IconButton(
-            hoverColor: AppColors.gray600,
-            onPressed: (){},
-            icon: FaIcon(
-              FontAwesomeIcons.linkedinIn,
-              color: AppColors.purpleDark,
-              size: 15,
+            child: IconButton(
+              hoverColor: AppColors.gray600,
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.linkedinIn,
+                color: AppColors.purpleDark,
+                size: 15,
+              ),
             ),
           ),
         ),
-
-        ),
-        const SizedBox(width: 10,),
+        const SizedBox(width: 10),
         Container(
           height: 40,
           width: 40,
           decoration: BoxDecoration(
             color: Colors.transparent,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.purpleDark.withValues())
+            border: Border.all(color: AppColors.purpleDark.withValues()),
           ),
           child: Center(
-          child: IconButton(
-            hoverColor: AppColors.gray600,
-            onPressed: (){},
-            icon: FaIcon(
-              FontAwesomeIcons.github,
-              color: AppColors.purpleDark,
-              size: 15,
+            child: IconButton(
+              hoverColor: AppColors.gray600,
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.github,
+                color: AppColors.purpleDark,
+                size: 15,
+              ),
             ),
           ),
         ),
-
-        ),
-        
       ],
     );
   }

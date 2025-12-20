@@ -15,7 +15,7 @@ class TabletLayout extends StatefulWidget {
 class _TabletLayoutState extends State<TabletLayout> {
   @override
   Widget build(BuildContext context) {
-    Size size=MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -23,13 +23,11 @@ class _TabletLayoutState extends State<TabletLayout> {
         decoration: Styles.gradientDecoration,
 
         child: SingleChildScrollView(
-
           child: Container(
-            margin: EdgeInsets.symmetric( vertical: size.height * 0.1),
-            child: 
-            Column(
-                children: [
-                  Row(
+            margin: EdgeInsets.symmetric(vertical: size.height * 0.1),
+            child: Column(
+              children: [
+                Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,43 +35,33 @@ class _TabletLayoutState extends State<TabletLayout> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Row(
-                        children: [
-                          HeaderTextWidget(size:size,),
-                        ],
-                        
-                      ),
-                      SizedBox(height: 20,),
-                      Social_Tab(size: size),
+                      children: [
+                        Row(children: [HeaderTextWidget(size: size)]),
+                        SizedBox(height: 20),
+                        Social_Tab(size: size),
                       ],
-                      ),
-                      Expanded(
+                    ),
+                    Expanded(
                       child: Container(
-                       
-                        child: Column
-                          (
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RotatingImageContainer()
-                          ],
+                          children: [RotatingImageContainer()],
                         ),
-                      ))
+                      ),
+                    ),
                   ],
-              )
-            ]
-          ),)
-          )
-        )
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
-    
   }
 }
 
 class Social_Tab extends StatelessWidget {
-  const Social_Tab({
-    super.key,
-    required this.size,
-  });
+  const Social_Tab({super.key, required this.size});
 
   final Size size;
 
@@ -84,13 +72,7 @@ class Social_Tab extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          DownloadCVButton(),
-          SizedBox(
-            height: 10,
-          ),
-          SocialWidget()
-        ],
+        children: [DownloadCVButton(), SizedBox(height: 10), SocialWidget()],
       ),
     );
   }
