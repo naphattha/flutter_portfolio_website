@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
@@ -24,32 +23,37 @@ class _DesktopLayoutState extends State<DesktopLayout> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-            
-            Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [Row(
-                      children: [
-                        HeaderTextWidget(size:size,)
-                      ],
-                    )],
-                    ),
-                    Expanded(child: Container(
-                      height: size.height*0.75,
-                      child: Column
-                        (
-                        mainAxisAlignment: MainAxisAlignment.center,
+            Container(
+                margin: EdgeInsets.symmetric( vertical: size.height * 0.1),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [Row(
                         children: [
-                          RotatingImageContainer()
+                          HeaderTextWidget(size:size,),
+                          SizedBox(height: 20,),
+                          //Social_large(size: size),
                         ],
+                        
+                      )],
                       ),
-                    ))
-                ],
+                      Expanded(child: Container(
+                       
+                        child: Column
+                          (
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RotatingImageContainer()
+                          ],
+                        ),
+                      ))
+                  ],
+              )
             )
-          
           ],)
         )
       )

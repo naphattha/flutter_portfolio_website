@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Social_widget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_portfolio_website/screens/widgets/download_cv_widget.dart';
+
 
 class SocialSection extends StatelessWidget {
   const SocialSection({super.key});
@@ -15,26 +15,8 @@ class SocialSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                color: AppColors.purpleCTA,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: AppColors.purpleBorder)
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("download Resume",style: TextStyle(color: AppColors.primaryGold,fontWeight: FontWeight.bold),),
-
-                  const SizedBox.square(dimension: 12,),
-                  FaIcon(FontAwesomeIcons.download,color: AppColors.primaryGold,size: 18,)
-                ],
-
-              ),
-            ),
-
+            
+            DownloadCVButton(),
             const SizedBox(width: 20,),
 
             Expanded(child: SocialWidget())
