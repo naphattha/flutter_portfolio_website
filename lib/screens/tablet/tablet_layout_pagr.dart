@@ -106,7 +106,7 @@ class Social_Tab extends StatelessWidget {
       width: size.width * 0.5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [DownloadCVButton(), SizedBox(height: 10), SocialWidget()],
       ),
     );

@@ -11,7 +11,7 @@ class SocialSection extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 50,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
