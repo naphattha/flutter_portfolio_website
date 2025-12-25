@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class DesktopLayout extends StatefulWidget {
   const DesktopLayout({super.key});
@@ -62,6 +65,36 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                   ],
                 ),
               ),
+              SizedBox(height: size.height*0.12,),
+              Container(
+                color: AppColors.purpleDark,
+                padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+                child: Column(
+                  children: [
+                    GradientText( "My Quality Services", colors: [
+                      AppColors.goldBorder,
+                      AppColors.primaryGold,
+                    ],
+
+                  style: TextStyle(
+                      fontSize: size.width * 0.030,
+                      fontFamily: 'mali',
+                      fontWeight: FontWeight.bold),
+
+                    ),
+                    SizedBox(height: size.height*0.02,),
+                    Text('We put your ideas and thus your wishes in the form of a unique web project that inspires you and you customers.', style: TextStyle(
+                        fontSize:size.width*0.012,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white
+                    ),),
+
+                    SizedBox(height: size.height*0.05,),
+                    MyServicesWidget(size:size),
+                  ],
+                ),
+              )
             ],
           ),
         ),

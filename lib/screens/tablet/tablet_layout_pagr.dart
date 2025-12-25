@@ -5,6 +5,7 @@ import 'package:flutter_portfolio_website/screens/widgets/Social_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/download_cv_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
 
 class TabletLayout extends StatefulWidget {
@@ -86,6 +87,8 @@ class _TabletLayoutState extends State<TabletLayout> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 20,),
+                MyServicesWidget(size: size),
              ],
             ),
           ),

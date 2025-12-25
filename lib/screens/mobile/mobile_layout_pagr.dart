@@ -4,6 +4,7 @@ import 'package:flutter_portfolio_website/constants/styles.dart';
 import 'package:flutter_portfolio_website/screens/tablet/tablet_layout_pagr.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
 
 class MobileLayout extends StatefulWidget {
@@ -85,6 +86,11 @@ class _MobileLayoutState extends State<MobileLayout> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: size.width * 0.09,
+                ),
+                
+                MyServicesWidget(size: size)
 
               ],
             ),
