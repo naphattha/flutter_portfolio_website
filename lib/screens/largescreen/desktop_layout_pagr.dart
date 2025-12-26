@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
+import 'package:flutter_portfolio_website/screens/widgets/Custom_tabbar.dart';
+import 'package:flutter_portfolio_website/screens/widgets/Gradient_Text_Widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
@@ -94,7 +96,20 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                     MyServicesWidget(size:size),
                   ],
                 ),
-              )
+              ),
+
+                    Container(
+                      width: size.width,
+                      padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+
+                      child: Column(
+                        children: [
+                          GradientTextWidget(size: size,text1:'My Recent Works.'),
+                          SizedBox(height: size.height*0.06,),
+                          CustomTabbar()
+                        ],
+                      ),
+                    )
             ],
           ),
         ),
