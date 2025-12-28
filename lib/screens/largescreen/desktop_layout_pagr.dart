@@ -16,7 +16,24 @@ class DesktopLayout extends StatefulWidget {
   State<DesktopLayout> createState() => _DesktopLayoutState();
 }
 
-class _DesktopLayoutState extends State<DesktopLayout> {
+class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProviderStateMixin{
+
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    
+    _tabController=TabController(length: 4, vsync: this);
+    
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -106,10 +123,15 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                         children: [
                           GradientTextWidget(size: size,text1:'My Recent Works.'),
                           SizedBox(height: size.height*0.06,),
-                          CustomTabbar()
+                          CustomTabbar(tabController: _tabController,)
                         ],
                       ),
+                    ),
+                    Container(
+                      height: size.height,
+                      child: CustomTabView(tabController: _tabController,),
                     )
+
             ],
           ),
         ),
