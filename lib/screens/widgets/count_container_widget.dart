@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:google_fonts/google_fonts.dart';
 class CountWidget extends StatelessWidget {
   final Size size;
   final String text1;
@@ -15,16 +16,15 @@ class CountWidget extends StatelessWidget {
       children: [
 
 
-        Text("${text1}",style: TextStyle(
+        Text("${text1}",style: GoogleFonts.montserrat(
           color: Colors.white,
-          fontFamily: 'Mali',
           fontWeight: FontWeight.w600,
-          fontSize: size.width*0.08
+          fontSize: size.width*0.032
         ),),
 
         SizedBox(width: 10,),
 
-        Text("${text2}\n${text3}",style: TextStyle(color: Colors.white,fontFamily: 'Mali',fontSize: size.width*0.0175),)
+        Text("${text2}\n${text3}",style: GoogleFonts.montserrat(color: Colors.white,fontSize: size.width*0.014),)
       ],
     );
   }

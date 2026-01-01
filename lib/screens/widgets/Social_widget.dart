@@ -18,7 +18,7 @@ class SocialWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.purpleDark.withValues()),
+            border: Border.all(color: AppColors.gray100.withValues()),
           ),
           child: Center(
             child: IconButton(
@@ -26,7 +26,7 @@ class SocialWidget extends StatelessWidget {
               onPressed: () {},
               icon: FaIcon(
                 FontAwesomeIcons.linkedinIn,
-                color: AppColors.purpleDark,
+                color: AppColors.gray100,
                 size: 15,
               ),
             ),
@@ -39,7 +39,7 @@ class SocialWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.transparent,
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.purpleDark.withValues()),
+            border: Border.all(color: AppColors.gray100.withValues()),
           ),
           child: Center(
             child: IconButton(
@@ -47,7 +47,7 @@ class SocialWidget extends StatelessWidget {
               onPressed: () {},
               icon: FaIcon(
                 FontAwesomeIcons.github,
-                color: AppColors.purpleDark,
+                color: AppColors.gray100,
                 size: 15,
               ),
             ),

@@ -9,6 +9,8 @@ import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class DesktopLayout extends StatefulWidget {
   const DesktopLayout({super.key});
 
@@ -95,16 +97,13 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
                       AppColors.primaryGold,
                     ],
 
-                  style: TextStyle(
+                  style: GoogleFonts.montserrat(
                       fontSize: size.width * 0.030,
-                      fontFamily: 'mali',
                       fontWeight: FontWeight.bold),
-
                     ),
                     SizedBox(height: size.height*0.02,),
-                    Text('We put your ideas and thus your wishes in the form of a unique web project that inspires you and you customers.', style: TextStyle(
+                    Text('We put your ideas and thus your wishes in the form of a unique web project that inspires you and you customers.', style: GoogleFonts.poppins(
                         fontSize:size.width*0.012,
-                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                         color: Colors.white
                     ),),
@@ -115,22 +114,22 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
                 ),
               ),
 
-                    Container(
-                      width: size.width,
-                      padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+              Container(
+                width: size.width,
+                padding: EdgeInsets.symmetric(vertical: size.width*0.05),
 
-                      child: Column(
-                        children: [
-                          GradientTextWidget(size: size,text1:'My Recent Works.'),
-                          SizedBox(height: size.height*0.06,),
-                          CustomTabbar(tabController: _tabController,)
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: size.height,
-                      child: CustomTabView(tabController: _tabController,),
-                    )
+                child: Column(
+                  children: [
+                    GradientTextWidget(size: size,text1:'My Recent Works.'),
+                    SizedBox(height: size.height*0.06,),
+                    CustomTabbar(tabController: _tabController,)
+                  ],
+                ),
+              ),
+              Container(
+                height: size.height,
+                child: CustomTabView(tabController: _tabController,),
+              )
 
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
+import 'package:google_fonts/google_fonts.dart';
 class GradientTextWidget extends StatelessWidget {
   final TextAlign? alignment;
   final String? text1;
@@ -32,9 +33,8 @@ class GradientTextWidget extends StatelessWidget {
         AppColors.accentPink,
         AppColors.accentDeep,
       ],
-      style: TextStyle(
+      style: GoogleFonts.montserrat(
           fontSize: size.width * 0.040,
-          fontFamily: 'Mali',
           fontWeight: FontWeight.bold),
     );
   }

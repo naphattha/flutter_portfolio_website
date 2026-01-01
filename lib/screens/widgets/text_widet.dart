@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class TextWidget extends StatelessWidget {
    final TextAlign ?alignment;
   final String ?text;
@@ -18,11 +20,11 @@ class TextWidget extends StatelessWidget {
     return Text(
       "$text",
       textAlign: sSize.width < 600 && alignment!=null ? alignment : null,
-      style: TextStyle(
-     fontSize: size!=null?size:sSize.width * 0.040,
+      style: GoogleFonts.montserrat(
+      fontSize: size ?? sSize.width * 0.040,
           color: color,
           fontWeight: fw,
-          fontFamily: 'Mali'),
+      ),
     );
   }
 }
