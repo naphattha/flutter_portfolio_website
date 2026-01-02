@@ -90,7 +90,7 @@ class Allprojects extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: filteredProjects.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: size.width < 650 ? 1 : size.width < 1100 ? 2 : 3,
+              crossAxisCount: size.width < 450 ? 1 : size.width < 950 ? 2 : 3,
               mainAxisSpacing: 20,
               crossAxisSpacing: 20,
               childAspectRatio: 1.1,
