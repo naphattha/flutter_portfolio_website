@@ -31,9 +31,11 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width < 600;
+
     return MouseRegion(
-      onEnter: (_) => _onHover(true),
-      onExit: (_) => _onHover(false),
+      onEnter: (_) => isMobile ? null : _onHover(true),
+      onExit: (_) => isMobile ? null : _onHover(false),
       cursor: SystemMouseCursors.click,
       child: Tooltip(
         message: 'Click to view project',
@@ -43,13 +45,13 @@ class _ProjectCardState extends State<ProjectCard> {
           onTap: () => _launchURL(widget.project.projectUrl),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            transform: _isHovered 
+            transform: _isHovered && !isMobile
                 ? (Matrix4.identity()..translate(0, -10, 0)..scale(1.025)) 
                 : Matrix4.identity(),
             decoration: BoxDecoration(
               color: AppColors.accentDeep.withOpacity(0.9),
               borderRadius: BorderRadius.circular(15),
-              boxShadow: _isHovered 
+              boxShadow: _isHovered && !isMobile
                 ? [
                     BoxShadow(
                       color: AppColors.primaryGold.withOpacity(0.4), // ใช้สีทองจางๆ 
@@ -85,7 +87,7 @@ class _ProjectCardState extends State<ProjectCard> {
                   Positioned.fill(
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
-                      opacity: _isHovered ? 0.9 : 0.3,
+                      opacity: isMobile ? 0.8 : (_isHovered ? 0.9 : 0.4),
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -141,38 +143,48 @@ class _ProjectCardState extends State<ProjectCard> {
                           ),
                         ),
 
-                        // Animated Detail Section
-                        AnimatedSize(
-                          duration: const Duration(milliseconds: 300),
-                          child: _isHovered 
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    widget.project.description,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(color: Colors.white70, fontSize: 12),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Wrap(
-                                    spacing: 6,
-                                    runSpacing: 6,
-                                    children: widget.project.tags.map<Widget>((tag) => Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.white30),
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: Text(tag, style: const TextStyle(color: Colors.amberAccent, fontSize: 10)),
-                                    )).toList(),
-                                  ),
-                                ],
-                              )
-                            : const SizedBox.shrink(),
-                          ),
+                        if (isMobile) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          widget.project.description,
+                          maxLines: 1, // มือถือบรรทัดเดียวพอ กันทะลุขอบ
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(color: Colors.white70, fontSize: 11),
+                        ),
+                        ] 
+                        else ...[// Animated Detail Section
+                          AnimatedSize(
+                            duration: const Duration(milliseconds: 300),
+                            child: _isHovered 
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      widget.project.description,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Wrap(
+                                      spacing: 6,
+                                      runSpacing: 6,
+                                      children: widget.project.tags.map<Widget>((tag) => Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.white30),
+                                          borderRadius: BorderRadius.circular(4),
+                                        ),
+                                        child: Text(tag, style: const TextStyle(color: Colors.amberAccent, fontSize: 10)),
+                                      )).toList(),
+                                    ),
+                                  ],
+                                )
+                              : const SizedBox.shrink(),
+                            ),
                         ],
+                      ]
                       ),
                     ),
                 ],

@@ -76,7 +76,7 @@ class NavbarWidget extends StatelessWidget {
                 Row(
                   children: [
                     _navItem("Services", 0),
-                    _navItem("Work", 1),
+                    _navItem("Projects", 1),
                     _navItem("Contact", 2),
                     const SizedBox(width: 20),
                     // ปุ่ม Highlight เล็กๆ แบบ GitHub Style

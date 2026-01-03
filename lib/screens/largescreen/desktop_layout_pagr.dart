@@ -23,29 +23,17 @@ class DesktopLayout extends StatefulWidget {
 
 class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProviderStateMixin{
 
-  // 1. สร้าง ScrollController และ Keys
+  late TabController _tabController;
   final ScrollController _scrollController = ScrollController();
+
   final GlobalKey _headerKey = GlobalKey();
   final GlobalKey _servicesKey = GlobalKey();
   final GlobalKey _worksKey = GlobalKey();
   final GlobalKey _contactKey = GlobalKey();
 
-  // 2. ฟังก์ชันสำหรับสั่งให้เลื่อนไปที่ Key นั้นๆ
-  void _scrollToSection(GlobalKey key) {
-    Scrollable.ensureVisible(
-      key.currentContext!,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOut,
-    );
-  }
-  
-  late TabController _tabController;
-
   @override
   void initState() {
-    
     _tabController=TabController(length: 4, vsync: this);
-    
     super.initState();
   }
   @override
@@ -54,6 +42,13 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
     super.dispose();
   }
 
+  void _scrollToSection(GlobalKey key) {
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +150,7 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
 
                     child: Column(
                       children: [
-                        GradientTextWidget(size: size,text1:'My Recent Works'),
+                        GradientTextWidget(size: size,text1:'My Recent Projects'),
                         CustomTabbar(tabController: _tabController,)
                       ],
                     ),
