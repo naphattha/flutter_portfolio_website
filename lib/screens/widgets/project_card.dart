@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/screens/widgets/text_widet.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,15 +20,17 @@ class _ProjectCardState extends State<ProjectCard> {
   // ฟังก์ชันสำหรับเปิด URL
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $url');
+    try {
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $url');
+      }
+    } catch (e) {
+      debugPrint("Error launching URL: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
@@ -47,7 +50,19 @@ class _ProjectCardState extends State<ProjectCard> {
               color: AppColors.accentDeep.withOpacity(0.9),
               borderRadius: BorderRadius.circular(15),
               boxShadow: _isHovered 
-                ? [BoxShadow(color: Colors.black26, blurRadius: 20, offset: Offset(0, 10))] 
+                ? [
+                    BoxShadow(
+                      color: AppColors.primaryGold.withOpacity(0.4), // ใช้สีทองจางๆ 
+                      blurRadius: 20,
+                      spreadRadius: 5, // เพิ่มรัศมีการกระจายเพื่อให้เห็นเงาแม้พื้นหลังสว่าง
+                      offset: const Offset(0, 10),
+                    ),
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3), // เพิ่มเงาสีดำซ้อนอีกชั้นเพื่อความคมชัด
+                      blurRadius: 10,
+                      spreadRadius: -2,
+                    )
+                  ]
                 : [],
             ),
             child: ClipRRect(
@@ -59,6 +74,10 @@ class _ProjectCardState extends State<ProjectCard> {
                     child: Image.asset(
                       widget.project.image,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: AppColors.purpleDark,
+                        child: const Icon(Icons.image_not_supported, color: Colors.white24),
+                      ),
                     ),
                   ),
 
@@ -74,8 +93,11 @@ class _ProjectCardState extends State<ProjectCard> {
                             end: Alignment.bottomCenter,
                             colors: [
                               Colors.transparent,
-                              AppColors.purpleDark.withOpacity(0.8),
+                              AppColors.purpleDark.withOpacity(0.4), // เริ่มเข้มจากกลางภาพ
+                              AppColors.purpleDark.withOpacity(0.9), // เข้มมากตรงส่วนล่าง
+                              Colors.black,
                             ],
+                            stops: const [0.0, 0.4, 0.8, 1.0],
                           ),
                         ),
                       ),
@@ -83,70 +105,76 @@ class _ProjectCardState extends State<ProjectCard> {
                   ),
 
                   // --- เลเยอร์ที่ 3: ข้อมูล Tags และปุ่ม (แสดงตอน Hover) ---
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOut,
-                      height: _isHovered ? size.height * 0.15 : 0, // ปรับความสูงตามความเหมาะสม
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: AppColors.purpleDark.withOpacity(0.8), // เพิ่มพื้นหลังให้ชัดขึ้น
-                      ),
-                      child: SingleChildScrollView( // สวนนี้จะช่วยแก้ปัญหา Overflow
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min, // ใช้พื้นที่เท่าที่จำเป็น
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // ชื่อโปรเจกต์ (โชว์ตลอดเวลา)
-                            TextWidget(
-                              sSize: size,
-                              text: widget.project.title,
-                              color: Colors.white,
-                              size: 18,
-                              fw: FontWeight.bold,
-                            ),
-                            
-                            const SizedBox(height: 8),
-
-                            // ใช้ AnimatedOpacity เพื่อให้ Tags ค่อยๆ จางขึ้นมา
-                            AnimatedOpacity(
-                              duration: const Duration(milliseconds: 300),
-                              opacity: _isHovered ? 1.0 : 0.0,
-                              child: Wrap(
-                                spacing: 5,
-                                runSpacing: 5,
-                                children: widget.project.tags.map<Widget>((tag) => 
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.accentPink.withOpacity(0.8),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Text(
-                                      tag,
-                                      style: const TextStyle(color: Colors.white, fontSize: 10),
-                                    ),
-                                  ),
-                                ).toList(),
-                              ),
-                            ),
-
-                            if (_isHovered) const SizedBox(height: 10),
-
-                            // ข้อความ Click (โชว์เฉพาะตอน Hover)
-                            if (_isHovered)
-                              const Center(
-                                child: Icon(Icons.open_in_new, color: Colors.white, size: 20),
-                              ),
-                          ],
+                  // Layer 3: Info
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Category Badge
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryGold,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            widget.project.category,
+                            style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                          ),
                         ),
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.project.title,
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.8), // เงาสีดำหลังตัวอักษร
+                                offset: const Offset(1, 2),
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // Animated Detail Section
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 300),
+                          child: _isHovered 
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    widget.project.description,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Wrap(
+                                    spacing: 6,
+                                    runSpacing: 6,
+                                    children: widget.project.tags.map<Widget>((tag) => Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.white30),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(tag, style: const TextStyle(color: Colors.amberAccent, fontSize: 10)),
+                                    )).toList(),
+                                  ),
+                                ],
+                              )
+                            : const SizedBox.shrink(),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -183,28 +211,32 @@ class Project {
 
 // ข้อมูลโปรเจกต์ของคุณ (เพิ่ม-ลดตรงนี้ได้เลย)
 List<Project> myProjectsData = [
+  // --- MOBILE SECTION (In Progress) ---
   Project(
     title: "E-Commerce App",
     category: "Mobile",
     tags: ["Flutter", "Firebase", "Stripe"],
     image: "assets/images/project1.png",
-    description: "แอปซื้อขายสินค้าออนไลน์...",
-    projectUrl:"https://github.com/naphattha/flutter_portfolio_website",
+    description: "Full-stack mobile commerce solution (Under Development).",
+    projectUrl: "https://github.com/naphattha",
   ),
+
+  // --- WEB SECTION ---
   Project(
     title: "Portfolio Website",
     category: "Web",
-    tags: ["Flutter Web", "Responsive"],
-    image: "assets/images/project1.png",
-    description: "เว็บไซต์พอร์ตโฟลิโอส่วนตัว...",
-    projectUrl:"https://github.com/naphattha/flutter_portfolio_website",
+    tags: ["Flutter Web", "Responsive", "Glassmorphism"],
+    image: "assets/images/project1.png", // เปลี่ยนที่อยู่รูปตามจริง
+    description: "Personal portfolio built with Flutter Web featuring smooth animations and sticky navigation.",
+    projectUrl: "https://github.com/naphattha/flutter_portfolio_website",
   ),
+  // --- OTHER SECTION (Highlight) ---
   Project(
-    title: "Food Delivery UI",
+    title: "LLM-RAG Financial QA",
     category: "Other",
-    tags: ["Figma", "UX/UI"],
-    image: "assets/images/project1.png",
-    description: "ออกแบบหน้าจอแอปส่งอาหาร...",
-    projectUrl:"https://github.com/naphattha/flutter_portfolio_website",
+    tags: ["Python", "Neo4j", "SQL", "LLM"],
+    image: "assets/images/project1.png", // แนะนำให้ใช้รูป Graph Database สวยๆ
+    description: "Financial Knowledge Graph & RAG-powered chatbot for SET50 data analysis using Neo4j and MySQL.",
+    projectUrl: "https://github.com/naphattha", // ใส่ลิงก์ Github ของโปรเจกต์นี้
   ),
 ];

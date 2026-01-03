@@ -21,6 +21,7 @@ class MobileLayout extends StatefulWidget {
 class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderStateMixin{
 
   late TabController _tabController;
+  
   @override
   void initState() {
     

@@ -17,8 +17,12 @@ class _DownloadCVButtonState extends State<DownloadCVButton> {
   // ฟังก์ชันสำหรับเปิด URL
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $url');
+    try {
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $url');
+      }
+    } catch (e) {
+      debugPrint("Error launching URL: $e");
     }
   }
 

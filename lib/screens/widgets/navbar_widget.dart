@@ -12,10 +12,14 @@ class NavbarWidget extends StatelessWidget {
   const NavbarWidget({super.key, required this.size, required this.onMenuTap});
     // ฟังก์ชันสำหรับเปิด URL
     Future<void> _launchURL(String url) async {
-      final Uri uri = Uri.parse(url);
-      if (!await launchUrl(uri)) {
+    final Uri uri = Uri.parse(url);
+    try {
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
         throw Exception('Could not launch $url');
       }
+    } catch (e) {
+      debugPrint("Error launching URL: $e");
+    }
     }
 
   @override
