@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
 import 'package:flutter_portfolio_website/screens/tablet/tablet_layout_pagr.dart';
-import 'package:flutter_portfolio_website/screens/widgets/Custom_tabbar.dart';
+import 'package:flutter_portfolio_website/screens/widgets/custom_tabbar.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Gradient_Text_Widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';

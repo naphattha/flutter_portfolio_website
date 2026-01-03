@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
-import 'package:flutter_portfolio_website/screens/widgets/Custom_tabbar.dart';
+import 'package:flutter_portfolio_website/screens/widgets/contact_section.dart';
+import 'package:flutter_portfolio_website/screens/widgets/custom_tabbar.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Gradient_Text_Widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/technical_skills_widget.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -92,24 +94,32 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
                 padding: EdgeInsets.symmetric(vertical: size.width*0.05),
                 child: Column(
                   children: [
-                    GradientText( "My Quality Services", colors: [
+                    GradientText( "My Professional Focus", colors: [
                       AppColors.goldBorder,
                       AppColors.primaryGold,
                     ],
-
                   style: GoogleFonts.montserrat(
                       fontSize: size.width * 0.030,
                       fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: size.height*0.02,),
-                    Text('We put your ideas and thus your wishes in the form of a unique web project that inspires you and you customers.', style: GoogleFonts.poppins(
-                        fontSize:size.width*0.012,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white
-                    ),),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.15), // เพิ่ม padding ไม่ให้ตัวหนังสือชิดขอบไป
+                      child:Text('Bridging the gap between robust back-end logic and intuitive mobile experiences, ensuring every line of code meets industry standards for quality and security.',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.montserrat(
+                          fontSize:size.width*0.012,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white70.withOpacity(0.8),
+                          height: 1.5
+                      ),),
+                    ),
 
                     SizedBox(height: size.height*0.05,),
                     MyServicesWidget(size:size),
+                    SizedBox(height: size.height * 0.1), // ระยะห่างก่อนถึงส่วน Skills
+
+                    TechnicalSkillsWidget(size: size),
                   ],
                 ),
               ),
@@ -121,15 +131,12 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
                 child: Column(
                   children: [
                     GradientTextWidget(size: size,text1:'My Recent Works.'),
-                    SizedBox(height: size.height*0.06,),
                     CustomTabbar(tabController: _tabController,)
                   ],
                 ),
               ),
-              Container(
-                height: size.height,
-                child: CustomTabView(tabController: _tabController,),
-              )
+              CustomTabView(tabController: _tabController,),
+              ContactSection(),
 
             ],
           ),

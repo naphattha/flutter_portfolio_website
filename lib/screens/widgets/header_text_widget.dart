@@ -21,18 +21,17 @@ class HeaderTextWidget extends StatelessWidget {
             : CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-              child: TextWidget(
+          TextWidget(
                 sSize: size,
                 text: "I am Naphattha",
                 color: AppColors.primaryGold,
                 size: 26,
                 fw: FontWeight.bold,
-                alignment: TextAlign.center,
-          )),
+                alignment: size.width > 600 ? TextAlign.start : TextAlign.center,
+          ),
           GradientTextWidget(
             size: size,
-            alignment: TextAlign.center,
+            alignment: size.width > 600 ? TextAlign.start : TextAlign.center,
             text1: "Flutter Developer",
             text2: "Mobile App Developer",
           ),
@@ -41,9 +40,9 @@ class HeaderTextWidget extends StatelessWidget {
             width: size.width * 0.5,
             child:  TextWidget(
                 sSize: size,
-                alignment: TextAlign.center,
+                alignment: size.width > 600 ? TextAlign.start : TextAlign.center,
                 text:
-                     "I’m an aspiring mobile developer specializing in Flutter. I build mobile applications while continuously learning modern mobile development practices.",
+                     "A Computer Science graduate with a passion for building high-quality, secure mobile applications. Leveraging my experience in QA and Data Analysis to deliver exceptional user experiences.",
                 size: 16,
                 color: Colors.white,
                 fw: FontWeight.normal),
