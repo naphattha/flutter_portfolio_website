@@ -23,7 +23,7 @@ class HeaderTextWidget extends StatelessWidget {
         children: [
           TextWidget(
                 sSize: size,
-                text: "I am Naphattha",
+                text: "I am Naphattha Chinaksorn",
                 color: AppColors.primaryGold,
                 size: 26,
                 fw: FontWeight.bold,

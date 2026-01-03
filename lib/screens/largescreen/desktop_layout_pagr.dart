@@ -7,6 +7,7 @@ import 'package:flutter_portfolio_website/screens/widgets/Gradient_Text_Widget.d
 import 'package:flutter_portfolio_website/screens/widgets/count_container_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
+import 'package:flutter_portfolio_website/screens/widgets/navbar_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/technical_skills_widget.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -22,6 +23,22 @@ class DesktopLayout extends StatefulWidget {
 
 class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProviderStateMixin{
 
+  // 1. สร้าง ScrollController และ Keys
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _headerKey = GlobalKey();
+  final GlobalKey _servicesKey = GlobalKey();
+  final GlobalKey _worksKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
+
+  // 2. ฟังก์ชันสำหรับสั่งให้เลื่อนไปที่ Key นั้นๆ
+  void _scrollToSection(GlobalKey key) {
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+    );
+  }
+  
   late TabController _tabController;
 
   @override
@@ -42,105 +59,129 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: Styles.gradientDecoration,
+      body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: Styles.gradientDecoration,
 
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: size.height * 0.1),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                children: [
+                  // ใส่ Key ให้กับแต่ละส่วน
+                  Container(key: _headerKey, child: const SizedBox(height: 20)),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: size.height * 0.1),
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(children: [HeaderTextWidget(size: size)]),
-                        SizedBox(height: 20),
-                        Social_large(size: size),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(children: [HeaderTextWidget(size: size)]),
+                            SizedBox(height: 20),
+                            Social_large(size: size),
+                          ],
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [RotatingImageContainer()],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [RotatingImageContainer()],
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: size.width*0.05),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CountWidget(size: size, text1: "0→1", text2: "From", text3: "Learning to Building"),
+                        CountWidget(size: size, text1: "Clean", text2: "Code &", text3: "Architecture"),
+                        CountWidget(size: size, text1: "Flutter", text2: "State", text3: "Management"),
+                        CountWidget(size: size, text1: "Real", text2: "World", text3: "Projects"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: size.height*0.12,),
+                  
+                  Container(
+                    key: _servicesKey,
+                    color: AppColors.purpleDark,
+                    padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+                    child: Column(
+                      children: [
+                        GradientText( "My Professional Focus", colors: [
+                          AppColors.goldBorder,
+                          AppColors.primaryGold,
+                        ],
+                      style: GoogleFonts.montserrat(
+                          fontSize: size.width * 0.030,
+                          fontWeight: FontWeight.bold),
                         ),
-                      ),
+                        SizedBox(height: size.height*0.02,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: size.width * 0.15), // เพิ่ม padding ไม่ให้ตัวหนังสือชิดขอบไป
+                          child:Text('Bridging the gap between robust back-end logic and intuitive mobile experiences, ensuring every line of code meets industry standards for quality and security.',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.montserrat(
+                              fontSize:size.width*0.012,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white70.withOpacity(0.8),
+                              height: 1.5
+                          ),),
+                        ),
+
+                        SizedBox(height: size.height*0.05,),
+                        MyServicesWidget(size:size),
+                        SizedBox(height: size.height * 0.1), // ระยะห่างก่อนถึงส่วน Skills
+
+                        TechnicalSkillsWidget(size: size),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: size.width*0.05),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CountWidget(size: size, text1: "0→1", text2: "From", text3: "Learning to Building"),
-                    CountWidget(size: size, text1: "Clean", text2: "Code &", text3: "Architecture"),
-                    CountWidget(size: size, text1: "Flutter", text2: "State", text3: "Management"),
-                    CountWidget(size: size, text1: "Real", text2: "World", text3: "Projects"),
-                  ],
-                ),
-              ),
-              SizedBox(height: size.height*0.12,),
-              Container(
-                color: AppColors.purpleDark,
-                padding: EdgeInsets.symmetric(vertical: size.width*0.05),
-                child: Column(
-                  children: [
-                    GradientText( "My Professional Focus", colors: [
-                      AppColors.goldBorder,
-                      AppColors.primaryGold,
-                    ],
-                  style: GoogleFonts.montserrat(
-                      fontSize: size.width * 0.030,
-                      fontWeight: FontWeight.bold),
+                  ),
+
+                  Container(
+                    key: _worksKey,
+                    width: size.width,
+                    padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+
+                    child: Column(
+                      children: [
+                        GradientTextWidget(size: size,text1:'My Recent Works'),
+                        CustomTabbar(tabController: _tabController,)
+                      ],
                     ),
-                    SizedBox(height: size.height*0.02,),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: size.width * 0.15), // เพิ่ม padding ไม่ให้ตัวหนังสือชิดขอบไป
-                      child:Text('Bridging the gap between robust back-end logic and intuitive mobile experiences, ensuring every line of code meets industry standards for quality and security.',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(
-                          fontSize:size.width*0.012,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white70.withOpacity(0.8),
-                          height: 1.5
-                      ),),
-                    ),
+                  ),
+                  CustomTabView(tabController: _tabController,),
+                  Container(key: _contactKey, child: ContactSection()),
 
-                    SizedBox(height: size.height*0.05,),
-                    MyServicesWidget(size:size),
-                    SizedBox(height: size.height * 0.1), // ระยะห่างก่อนถึงส่วน Skills
-
-                    TechnicalSkillsWidget(size: size),
-                  ],
-                ),
+                ],
               ),
-
-              Container(
-                width: size.width,
-                padding: EdgeInsets.symmetric(vertical: size.width*0.05),
-
-                child: Column(
-                  children: [
-                    GradientTextWidget(size: size,text1:'My Recent Works.'),
-                    CustomTabbar(tabController: _tabController,)
-                  ],
-                ),
-              ),
-              CustomTabView(tabController: _tabController,),
-              ContactSection(),
-
-            ],
+            ),
           ),
+          Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          child: NavbarWidget(
+              size: size,
+              onMenuTap: (index) {
+                if (index == -1) _scrollToSection(_headerKey);
+                if (index == 0) _scrollToSection(_servicesKey);
+                if (index == 1) _scrollToSection(_worksKey);
+                if (index == 2) _scrollToSection(_contactKey);
+              },
+            ),
         ),
+        ]
       ),
     );
   }
