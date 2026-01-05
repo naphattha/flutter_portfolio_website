@@ -11,9 +11,10 @@ class CustomTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
     bool isMobile = size.width < 600;
+    bool isTablet = size.width < 1024;
 
     return Container(
-      width: isMobile ? size.width * 0.7 : size.width * 0.4,
+      width: isMobile ? size.width * 0.7 : (isTablet?size.width * 0.6:size.width * 0.4),
       decoration: BoxDecoration(
         border: Border.all(color:Colors.amber),
           color: AppColors.purpleDark,

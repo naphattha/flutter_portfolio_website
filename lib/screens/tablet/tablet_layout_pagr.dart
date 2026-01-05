@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_portfolio_website/constants/colors.dart';
 import 'package:flutter_portfolio_website/constants/styles.dart';
+import 'package:flutter_portfolio_website/screens/widgets/contact_section.dart';
 import 'package:flutter_portfolio_website/screens/widgets/custom_tabbar.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Gradient_Text_Widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/Social_widget.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_portfolio_website/screens/widgets/download_cv_widget.dar
 import 'package:flutter_portfolio_website/screens/widgets/header_text_widget.dart';
 import 'package:flutter_portfolio_website/screens/widgets/myservice_widgets.dart';
 import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.dart';
+import 'package:flutter_portfolio_website/screens/widgets/technical_skills_widget.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,6 +24,13 @@ class TabletLayout extends StatefulWidget {
 class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderStateMixin{
   
   late TabController _tabController;
+  final ScrollController _scrollController = ScrollController();
+
+  final GlobalKey _headerKey = GlobalKey();
+  final GlobalKey _servicesKey = GlobalKey();
+  final GlobalKey _worksKey = GlobalKey();
+  final GlobalKey _contactKey = GlobalKey();
+
   @override
   void initState() {
     
@@ -34,101 +43,161 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
     _tabController.dispose();
     super.dispose();
   }
+
+  void _scrollToSection(GlobalKey key) {
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      endDrawer: Drawer(
+        backgroundColor: AppColors.purpleDark,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(child: Center(child: Text("MENU", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)))),
+            _buildDrawerItem("Home", () => _scrollToSection(_headerKey)),
+            _buildDrawerItem("Services", () => _scrollToSection(_servicesKey)),
+            _buildDrawerItem("Works", () => _scrollToSection(_worksKey)),
+            _buildDrawerItem("Contact", () => _scrollToSection(_contactKey)),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: AppColors.purpleDark,
+        elevation: 0,
+        title: const Text("My Portfolio", style: TextStyle(color: AppColors.primaryGold)),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
         decoration: Styles.gradientDecoration,
-
         child: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: size.height * 0.1),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          controller: _scrollController,
+          child: Column(
+            children: [
+              // --- SECTION: HEADER ---
+              Container(key: _headerKey, height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
+                child: Column(
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(children: [HeaderTextWidget(size: size)]),
-                        SizedBox(height: 20),
-                        Social_Tab(size: size),
-                      ],
+                    RotatingImageContainer(), // รูปภาพอยู่บน
+                    const SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: HeaderTextWidget(size: size), // ข้อความอยู่ล่าง
                     ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [RotatingImageContainer()],
-                        ),
+                    const SizedBox(height: 20),
+                    Social_Tab(size: size),
+                  ],
+                ),
+              ),
+              // --- SECTION: COUNTER/STATS ---
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
+                child: Column(
+                  children: [
+                    _mobileCountItem(size, "0→1", "From Learning", "to Building"),
+                    _mobileCountItem(size, "Clean", "Code &", "Architecture"),
+                    _mobileCountItem(size, "Flutter", "State", "Management"),
+                    _mobileCountItem(size, "Real", "World", "Projects"),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: size.height * 0.07),
+
+              // --- SECTION: SERVICES & SKILLS ---
+              Container(
+                key: _servicesKey,
+                width: double.infinity,
+                color: AppColors.purpleDark.withOpacity(0.5),
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.05, horizontal: 20),
+                child: Column(
+                  children: [
+                    Text(
+                      "My Professional Focus",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 24,
+                        color: AppColors.primaryGold,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      'Bridging the gap between back-end logic and intuitive mobile experiences.',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    MyServicesWidget(size: size),
+                    const SizedBox(height: 50),
+                    TechnicalSkillsWidget(size: size),
+                  ],
+                ),
+              ),
+
+              // --- SECTION: WORKS ---
+              Container(
+                key: _worksKey,
+                padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
+                child: Column(
+                  children: [
+                    GradientTextWidget(size: size, text1: 'My Recent Works'),
+                    const SizedBox(height: 20),
+                    CustomTabbar(tabController: _tabController),
+                    const SizedBox(height: 20),
+                    // ปรับความสูง TabView ให้พอดีกับ Mobile
+                    SizedBox(
+                      height: size.height * 0.8, 
+                      child: CustomTabView(tabController: _tabController),
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
-                Container(
-                  width: size.width,
-                  margin: EdgeInsets.symmetric(horizontal: size.width*0.05),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CountWidget(size: size, text1: "0→1", text2: "From", text3: "Learning to Building"),
-                      const SizedBox(height: 10,),
-                      Divider(
-                        color: AppColors.gray600,
-                        indent: size.width*0.05,
-                        endIndent: size.width*0.05,
-                      ),
-                      CountWidget(size: size, text1: "Clean", text2: "Code &", text3: "Architecture"),
-                      const SizedBox(height: 10,),
-                      Divider(
-                        color: AppColors.gray600,
-                        indent: size.width*0.05,
-                        endIndent: size.width*0.05,
-                      ),
-                      CountWidget(size: size, text1: "Flutter", text2: "State", text3: "Management"),
-                      const SizedBox(height: 10,),
-                      Divider(
-                        color: AppColors.gray600,
-                        indent: size.width*0.05,
-                        endIndent: size.width*0.05,
-                      ),
-                      CountWidget(size: size, text1: "Real", text2: "World", text3: "Projects"),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20,),
-                MyServicesWidget(size: size),
-                Container(
-                  width: size.width,
-                  padding: EdgeInsets.symmetric(vertical: size.width*0.05),
+              ),
 
-                  child: Column(
-                    children: [
-                      GradientTextWidget(size: size,text1:'My Recent Works.'),
-                      SizedBox(height: size.height*0.06,),
-                      CustomTabbar(tabController: _tabController,)
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: size.height,
-                    child: CustomTabView(tabController: _tabController,),
-                  )
-             ],
-            ),
+              // --- SECTION: CONTACT ---
+              Container(
+                key: _contactKey,
+                child: const ContactSection(),
+              ),
+              const SizedBox(height: 50),
+            ],
           ),
-
         ),
       ),
+    );
+  }
+
+  // Helper สำหรับสร้าง Count Item พร้อมเส้นคั่น
+  Widget _mobileCountItem(Size size, String t1, String t2, String t3) {
+    return Column(
+      children: [
+        CountWidget(size: size, text1: t1, text2: t2, text3: t3),
+        Divider(color: AppColors.gray600.withOpacity(0.3), height: 30),
+      ],
+    );
+  }
+
+  Widget _buildDrawerItem(String title, VoidCallback onTap) {
+    return ListTile(
+      title: Text(title, style: const TextStyle(color: Colors.white)),
+      onTap: () {
+        Navigator.pop(context); // ปิด Drawer
+        onTap();
+      },
     );
   }
 }
