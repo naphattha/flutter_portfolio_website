@@ -132,7 +132,7 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
                         "My Professional Focus",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
-                          fontSize: 24,
+                          fontSize: size.width * 0.050,
                           color: AppColors.primaryGold,
                           fontWeight: FontWeight.bold,
                         ),
@@ -142,7 +142,7 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
                         'Bridging the gap between back-end logic and intuitive mobile experiences.',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.montserrat(
-                          fontSize: 14,
+                          fontSize: size.width * 0.030,
                           color: Colors.white70,
                         ),
                       ),
@@ -178,7 +178,9 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
               // --- SECTION: CONTACT ---
               Container(
                 key: _contactKey,
-                child: const ContactSection(),
+                child: const ContactSection(
+                  key: const Key('contact-section'), //เอาไว้test
+                  ),
               ),
 
               ],

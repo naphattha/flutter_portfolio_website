@@ -54,24 +54,27 @@ class _DownloadCVButtonState extends State<DownloadCVButton> {
           transform: _isHovered 
               ? (Matrix4.identity()..scale(1.05)) // ขยายใหญ่ขึ้น 5%
               : Matrix4.identity(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Download my resume",
-                style: TextStyle(
-                  color: AppColors.primaryGold,
-                  fontSize: 14, // ปรับขนาดให้ชัดขึ้นเล็กน้อย
-                  fontWeight: FontWeight.bold,
+          child: FittedBox(
+            fit: BoxFit.scaleDown, // ถ้าพื้นที่พอจะขนาดปกติ ถ้าไม่พอจะย่อลง
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Download my resume",
+                  style: TextStyle(
+                    color: AppColors.primaryGold,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              FaIcon(
-                FontAwesomeIcons.download,
-                color: AppColors.primaryGold,
-                size: 18,
-              ),
-            ],
+                const SizedBox(width: 12),
+                FaIcon(
+                  FontAwesomeIcons.download,
+                  color: AppColors.primaryGold,
+                  size: 18,
+                ),
+              ],
+            ),
           ),
         ),
       ),

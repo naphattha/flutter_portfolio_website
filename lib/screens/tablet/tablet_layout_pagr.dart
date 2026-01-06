@@ -155,15 +155,12 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
                 padding: EdgeInsets.symmetric(vertical: size.height * 0.05),
                 child: Column(
                   children: [
-                    GradientTextWidget(size: size, text1: 'My Recent Works'),
+                    GradientTextWidget(size: size, text1: 'My Recent Projects'),
                     const SizedBox(height: 20),
                     CustomTabbar(tabController: _tabController),
                     const SizedBox(height: 20),
-                    // ปรับความสูง TabView ให้พอดีกับ Mobile
-                    SizedBox(
-                      height: size.height * 0.8, 
-                      child: CustomTabView(tabController: _tabController),
-                    ),
+              
+                    CustomTabView(tabController: _tabController),
                   ],
                 ),
               ),
