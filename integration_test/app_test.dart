@@ -8,30 +8,63 @@ void main() {
 
   group('End-to-End Test', () {
     testWidgets('Verify project filtering and scrolling', (tester) async {
-  app.main();
-  
-  // รอสักครู่ให้แอปโหลด (แทน pumpAndSettle)
-  await tester.pump(const Duration(seconds: 2)); 
+      // 1. เริ่มแอป
+      app.main();
+      await tester.pumpAndSettle();
 
-  // ทดสอบการเปลี่ยน Tab
-  final webTab = find.text('Web');
-  await tester.tap(webTab);
-  
-  // รอให้ UI อัปเดตหลังกด
-  await tester.pump(const Duration(milliseconds: 500)); 
+      // ----------------------------------------------------------
+      // ส่วนที่ 1: กดปุ่ม Web
+      // ----------------------------------------------------------
+      final webTab = find.text('Web').first;
 
-  // ทดสอบการ Scroll ไปที่ Contact
-  final contactSection = find.byKey(const Key('contact-section'));
-  
-  await tester.scrollUntilVisible(
-    contactSection,
-    500.0,
-    scrollable: find.byType(SingleChildScrollView).first,
-  );
-  
-  await tester.pump(const Duration(milliseconds: 500));
+      // พยายาม Scroll ไปหาปุ่ม Web ก่อน (เผื่อหน้าจอเล็ก)
+      // ใช้ Finder หาตัว Widget หลักของ App เพื่อใช้ลาก (ใช้ MaterialApp ชัวร์สุด)
+      await tester.scrollUntilVisible(
+        webTab,
+        100.0, // Scroll ทีละนิด
+        scrollable: find.byType(Scrollable).first, // ให้มันหาตัวเลื่อนตัวแรก
+        maxScrolls: 50, // จำกัดจำนวนครั้งกันค้าง
+      );
+      await tester.pumpAndSettle();
 
-  expect(find.text('Get In Touch'), findsOneWidget);
-});
+      // กดปุ่ม (ใส่ warnIfMissed: false เพื่อข้าม Warning เรื่องพิกัด)
+      await tester.tap(webTab, warnIfMissed: false);
+      await tester.pumpAndSettle();
+
+      // ----------------------------------------------------------
+      // ส่วนที่ 2: เลื่อนลงไปหา Contact
+      // ----------------------------------------------------------
+      final contactSection = find.text('Get In Touch'); // หาจาก Text แทน Key จะเจอง่ายกว่าในบางที
+
+      // ใช้เทคนิค "Drag ลากหน้าจอ" ซึ่งเสถียรที่สุดบนเว็บ
+      bool found = false;
+      for (int i = 0; i < 15; i++) { // วนลูป 15 ครั้ง
+        // เช็คก่อนว่าเจอหรือยัง
+        if (tester.any(contactSection)) {
+          found = true;
+          break;
+        }
+
+        // ถ้ายังไม่เจอ ให้ลากหน้าจอขึ้น (เพื่อให้เนื้อหาเลื่อนลง)
+        // ลากที่กลางจอเลย
+        await tester.drag(find.byType(MaterialApp), const Offset(0, -500));
+        await tester.pump(const Duration(milliseconds: 500)); // รอ Animation นิดนึง
+      }
+
+      // ----------------------------------------------------------
+      // ส่วนที่ 3: ตรวจสอบผล
+      // ----------------------------------------------------------
+      if (!found) {
+        // ถ้า drag แล้วยังไม่เจอ ลอง scrollUntilVisible
+        await tester.scrollUntilVisible(
+          contactSection,
+          500.0,
+          scrollable: find.byType(Scrollable).first,
+        );
+      }
+      
+      await tester.pumpAndSettle();
+      expect(find.text('Get In Touch'), findsOneWidget);
+    });
   });
 }
