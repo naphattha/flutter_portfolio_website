@@ -83,7 +83,7 @@ class NavbarWidget extends StatelessWidget {
                     MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
-                        onTap: () => _launchURL("https://your-resume-link.pdf"),
+                        onTap: () => _launchURL("https://drive.google.com/file/d/1bfnLei2pisY4g9Mtc8NjMPCJKBx0-TpK/view?usp=drive_link"),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                           decoration: BoxDecoration(

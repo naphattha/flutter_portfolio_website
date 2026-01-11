@@ -34,7 +34,7 @@ class _DownloadCVButtonState extends State<DownloadCVButton> {
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => _launchURL("https://your-resume-link.pdf"),
+        onTap: () => _launchURL("https://drive.google.com/file/d/1bfnLei2pisY4g9Mtc8NjMPCJKBx0-TpK/view?usp=sharing"),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           height: 50,

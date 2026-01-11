@@ -68180,7 +68180,7 @@ A.a8p.prototype={
 $0(){return this.a.d=!1},
 $S:0}
 A.a8r.prototype={
-$0(){return this.a.r7("https://your-resume-link.pdf")},
+$0(){return this.a.r7("https://drive.google.com/file/d/1bfnLei2pisY4g9Mtc8NjMPCJKBx0-TpK/view?usp=sharing")},
 $S:0}
 A.p0.prototype={
 K(a){var s=null,r=this.c,q=r.a,p=q*0.07,o=q>600,n=o?B.aW:B.C,m=A.nB(o?B.ao:B.ba,B.q,B.P,r,26,"I am Naphattha Chinaksorn"),l=A.VJ(o?B.ao:B.ba,r,"Flutter Developer","Mobile App Developer")
@@ -68280,7 +68280,7 @@ A.a_G.prototype={
 $0(){return this.a.d.$1(-1)},
 $S:0}
 A.a_H.prototype={
-$0(){return this.a.rD("https://your-resume-link.pdf")},
+$0(){return this.a.rD("https://drive.google.com/file/d/1bfnLei2pisY4g9Mtc8NjMPCJKBx0-TpK/view?usp=drive_link")},
 $S:0}
 A.a_F.prototype={
 $0(){return this.a.d.$1(this.b)},
