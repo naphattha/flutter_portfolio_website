@@ -33,9 +33,9 @@ class NavbarWidget extends StatelessWidget {
           height: 70,
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
           decoration: BoxDecoration(
-            color: AppColors.purpleDark.withOpacity(0.7), // สีพื้นหลังโปร่งแสง
+            color: AppColors.bgGreenDark.withOpacity(0.7), // สีพื้นหลังโปร่งแสง
             border: const Border(
-              bottom: BorderSide(color: Colors.white10, width: 0.5),
+              bottom: BorderSide(color: AppColors.greenBorder, width: 0.5),
             ),
           ),
           child: Row(
@@ -60,7 +60,7 @@ class NavbarWidget extends StatelessWidget {
                           TextSpan(
                             text: "CHINAKSORN",
                             style: GoogleFonts.montserrat(
-                              color: AppColors.primaryGold,
+                              color: AppColors.echoesBright,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
@@ -87,13 +87,13 @@ class NavbarWidget extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.primaryGold),
+                            border: Border.all(color: AppColors.echoesBright, width: 1.5),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: Text(
                             "Resume",
                             style: GoogleFonts.montserrat(
-                              color: AppColors.primaryGold,
+                              color: AppColors.echoesBright,
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                             ),
@@ -104,7 +104,7 @@ class NavbarWidget extends StatelessWidget {
                   ],
                 )
               else
-                const Icon(Icons.menu, color: Colors.white), // สำหรับ Mobile
+                const Icon(Icons.menu, color: AppColors.echoesBright), // สำหรับ Mobile
             ],
           ),
         ),
@@ -120,9 +120,9 @@ class NavbarWidget extends StatelessWidget {
         child: Text(
           title,
           style: GoogleFonts.montserrat(
-            color: Colors.white70,
+            color: Colors.white70.withOpacity(0.8),
             fontSize: 14,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

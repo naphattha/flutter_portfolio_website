@@ -12,6 +12,7 @@ import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.
 import 'package:flutter_portfolio_website/screens/widgets/technical_skills_widget.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class MobileLayout extends StatefulWidget {
   const MobileLayout({super.key});
@@ -56,22 +57,29 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
     return Scaffold(
       // แนะนำให้เพิ่ม Drawer สำหรับ Mobile Menu
       endDrawer: Drawer(
-        backgroundColor: AppColors.purpleDark,
+        backgroundColor: AppColors.bgGreenDark,
         child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(child: Center(child: Text("MENU", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)))),
-            _buildDrawerItem("Home", () => _scrollToSection(_headerKey)),
-            _buildDrawerItem("Services", () => _scrollToSection(_servicesKey)),
-            _buildDrawerItem("Works", () => _scrollToSection(_worksKey)),
-            _buildDrawerItem("Contact", () => _scrollToSection(_contactKey)),
-          ],
-        ),
+    padding: EdgeInsets.zero,
+    children: [
+      DrawerHeader(
+        decoration: BoxDecoration(color: AppColors.primaryDark), // ส่วนหัวของเมนูสีเขียวเข้ม
+        child: Center(
+          child: Text("MENU", 
+            style: TextStyle(color: AppColors.echoesBright, fontSize: 24, fontWeight: FontWeight.bold)
+                  )
+                )
+              ),
+              _buildDrawerItem("Home", () => _scrollToSection(_headerKey)),
+              _buildDrawerItem("Services", () => _scrollToSection(_servicesKey)),
+              _buildDrawerItem("Works", () => _scrollToSection(_worksKey)),
+              _buildDrawerItem("Contact", () => _scrollToSection(_contactKey)),
+            ],
+          ),
       ),
       appBar: AppBar(
-        backgroundColor: AppColors.purpleDark,
+        backgroundColor: AppColors.primaryDark,
         elevation: 0,
-        title: const Text("My Portfolio", style: TextStyle(color: AppColors.primaryGold)),
+        title: const Text("My Portfolio", style: TextStyle(color: AppColors.echoesBright)),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
@@ -124,24 +132,23 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
                 Container(
                   key: _servicesKey,
                   width: double.infinity,
-                  color: AppColors.purpleDark.withOpacity(0.5),
+                  color: AppColors.bgGreenDark.withOpacity(0.8),
                   padding: EdgeInsets.symmetric(vertical: size.height * 0.05, horizontal: 20),
                   child: Column(
                     children: [
-                      Text(
-                        "My Professional Focus",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(
+                      GradientText( "My Professional Focus", colors: [
+                          AppColors.greenBorder,
+                          AppColors.echoesBright,
+                        ],
+                        style: TextStyle(
                           fontSize: size.width * 0.050,
-                          color: AppColors.primaryGold,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold),
                         ),
-                      ),
                       const SizedBox(height: 15),
                       Text(
                         'Bridging the gap between back-end logic and intuitive mobile experiences.',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(
+                        style: TextStyle(
                           fontSize: size.width * 0.030,
                           color: Colors.white70,
                         ),
@@ -197,7 +204,7 @@ class _MobileLayoutState extends State<MobileLayout> with SingleTickerProviderSt
     return Column(
       children: [
         CountWidget(size: size, text1: t1, text2: t2, text3: t3),
-        Divider(color: AppColors.gray600.withOpacity(0.3), height: 30),
+        Divider(color: AppColors.echoesBright.withOpacity(0.2), height: 30),
       ],
     );
   }

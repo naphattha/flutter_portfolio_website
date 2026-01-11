@@ -13,6 +13,7 @@ import 'package:flutter_portfolio_website/screens/widgets/rotating_image_widget.
 import 'package:flutter_portfolio_website/screens/widgets/technical_skills_widget.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class TabletLayout extends StatefulWidget {
   const TabletLayout({super.key});
@@ -57,11 +58,13 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       endDrawer: Drawer(
-        backgroundColor: AppColors.purpleDark,
+        backgroundColor: AppColors.bgGreenDark,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(child: Center(child: Text("MENU", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)))),
+            DrawerHeader(
+              decoration: BoxDecoration(color: AppColors.primaryDark),
+              child: Center(child: Text("MENU", style: TextStyle(color: AppColors.echoesBright, fontSize: 24, fontWeight: FontWeight.bold)))),
             _buildDrawerItem("Home", () => _scrollToSection(_headerKey)),
             _buildDrawerItem("Services", () => _scrollToSection(_servicesKey)),
             _buildDrawerItem("Works", () => _scrollToSection(_worksKey)),
@@ -70,9 +73,9 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
         ),
       ),
       appBar: AppBar(
-        backgroundColor: AppColors.purpleDark,
+        backgroundColor: AppColors.primaryDark,
         elevation: 0,
-        title: const Text("My Portfolio", style: TextStyle(color: AppColors.primaryGold)),
+        title: const Text("My Portfolio", style: TextStyle(color: AppColors.echoesBright)),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
@@ -119,25 +122,24 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
               Container(
                 key: _servicesKey,
                 width: double.infinity,
-                color: AppColors.purpleDark.withOpacity(0.5),
+                color: AppColors.bgGreenDark.withOpacity(0.9),
                 padding: EdgeInsets.symmetric(vertical: size.height * 0.05, horizontal: 20),
                 child: Column(
                   children: [
-                    Text(
-                      "My Professional Focus",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 24,
-                        color: AppColors.primaryGold,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    GradientText( "My Professional Focus", colors: [
+                          AppColors.greenBorder,
+                          AppColors.echoesBright,
+                        ],
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold),
+                        ),
                     const SizedBox(height: 15),
                     Text(
                       'Bridging the gap between back-end logic and intuitive mobile experiences.',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.montserrat(
-                        fontSize: 14,
+                        fontSize: 16,
                         color: Colors.white70,
                       ),
                     ),
@@ -157,7 +159,10 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
                   children: [
                     GradientTextWidget(size: size, text1: 'My Recent Projects'),
                     const SizedBox(height: 20),
-                    CustomTabbar(tabController: _tabController),
+                    Transform.scale(
+                      scale: 0.8, 
+                      child: CustomTabbar(tabController: _tabController),
+                    ),
                     const SizedBox(height: 20),
               
                     CustomTabView(tabController: _tabController),
@@ -183,7 +188,7 @@ class _TabletLayoutState extends State<TabletLayout> with SingleTickerProviderSt
     return Column(
       children: [
         CountWidget(size: size, text1: t1, text2: t2, text3: t3),
-        Divider(color: AppColors.gray600.withOpacity(0.3), height: 30),
+        Divider(color: AppColors.echoesBright.withOpacity(0.15), height: 40),
       ],
     );
   }
@@ -207,11 +212,15 @@ class Social_Tab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width * 0.5,
+      width: size.width * 0.4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [DownloadCVButton(), SizedBox(height: 10), SocialWidget()],
+        children: [
+          DownloadCVButton(), 
+          const SizedBox(height: 15), 
+          SocialWidget()
+        ],
       ),
     );
   }

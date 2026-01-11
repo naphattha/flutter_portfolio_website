@@ -37,7 +37,7 @@ class TechnicalSkillsWidget extends StatelessWidget {
         Container(
           width: 60,
           height: 3,
-          color: AppColors.primaryGold,
+          color: AppColors.echoesBright,
         ),
         const SizedBox(height: 40),
         SizedBox(
@@ -82,16 +82,16 @@ class _TechCardState extends State<TechCard> {
               padding: const EdgeInsets.all(18),
               decoration: BoxDecoration(
                 color: isHovered 
-                    ? AppColors.primaryGold.withOpacity(0.1) 
+                    ? AppColors.echoesBright.withOpacity(0.1) 
                     : Colors.white.withOpacity(0.05),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isHovered ? AppColors.primaryGold : Colors.white10,
+                  color: isHovered ? AppColors.echoesBright : Colors.white10,
                   width: 2,
                 ),
                 boxShadow: isHovered ? [
                   BoxShadow(
-                    color: AppColors.primaryGold.withOpacity(0.2),
+                    color: AppColors.echoesBright.withOpacity(0.3),
                     blurRadius: 15,
                     spreadRadius: 2,
                   )
@@ -99,7 +99,7 @@ class _TechCardState extends State<TechCard> {
               ),
               child: FaIcon(
                 widget.skill['icon'],
-                color: isHovered ? AppColors.primaryGold : Colors.white70,
+                color: isHovered ? AppColors.echoesBright : Colors.white70,
                 size: 32,
               ),
             ),
@@ -107,7 +107,7 @@ class _TechCardState extends State<TechCard> {
             Text(
               widget.skill['name'],
               style: GoogleFonts.poppins(
-                color: isHovered ? AppColors.primaryGold : Colors.white60,
+                color: isHovered ? AppColors.echoesBright : Colors.white60,
                 fontSize: 13,
                 fontWeight: isHovered ? FontWeight.bold : FontWeight.w500,
               ),

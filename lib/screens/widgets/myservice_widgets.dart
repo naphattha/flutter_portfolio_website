@@ -55,25 +55,31 @@ class _MyServicesWidgetState extends State<MyServicesWidget> {
 
             margin: EdgeInsets.symmetric(
               horizontal: widget.size.width * 0.05,
-              vertical: 5,
+              vertical: 8,
             ),
 
             width: widget.size.width,
             decoration: BoxDecoration(
-              color: _isHovered[index] ? null : Colors.transparent,
-              borderRadius: BorderRadius.circular(
-                15,
-              ), // เพิ่มความโค้งเล็กน้อยให้ดูทันสมัย
+              color: _isHovered[index] ? null : Colors.white.withOpacity(0.02),
+              borderRadius: BorderRadius.circular(15), // เพิ่มความโค้งเล็กน้อยให้ดูทันสมัย
               border: Border.all(
                 color: _isHovered[index]
-                    ? AppColors.goldCTADark.withOpacity(0.5)
+                    ? AppColors.echoesBright.withOpacity(0.8)
                     : Colors.white10,
               ),
               gradient: _isHovered[index]
                   ? LinearGradient(
-                      colors: [AppColors.purpleMid, AppColors.purpleSoft],
+                      colors: [AppColors.primaryGreen.withOpacity(0.4),
+                       AppColors.soundDeepPurple.withOpacity(0.4)],
                     )
                   : null,
+                boxShadow: _isHovered[index] ? [
+                BoxShadow(
+                  color: AppColors.echoesBright.withOpacity(0.1),
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                )
+              ] : [],
             ),
             child: widget.size.width > 600
                 ? Row(
@@ -81,11 +87,11 @@ class _MyServicesWidgetState extends State<MyServicesWidget> {
                     children: [
                       TextWidget(
                         sSize: widget.size,
-                        text: "${index + 1}",
+                        text: "0${index + 1}",
                         size: 28,
                         color: _isHovered[index]
                             ? Colors.white
-                            : AppColors.primaryGold,
+                            : AppColors.echoesBright,
                         fw: FontWeight.bold,
                       ),
                       const SizedBox(width: 20),
@@ -116,7 +122,7 @@ class _MyServicesWidgetState extends State<MyServicesWidget> {
                             : FontAwesomeIcons.circleChevronRight,
                         color: _isHovered[index]
                             ? Colors.white
-                            : AppColors.goldCTADark,
+                            : AppColors.greenCTADark,
                         size: 20,
                       ),
                     ],
@@ -128,7 +134,7 @@ class _MyServicesWidgetState extends State<MyServicesWidget> {
                         sSize: widget.size,
                         text: "${index + 1}",
                         size: 20,
-                        color: AppColors.primaryGold,
+                        color: AppColors.echoesBright,
                         fw: FontWeight.bold,
                       ),
                       const SizedBox(height: 10),
@@ -164,11 +170,11 @@ Widget _buildTechIcon(IconData icon, String label) {
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.05),
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.primaryGold.withOpacity(0.2)),
+          border: Border.all(color: AppColors.echoesBright.withOpacity(0.2)),
         ),
         child: FaIcon(
           icon,
-          color: AppColors.primaryGold,
+          color: AppColors.echoesBright,
           size: 30,
         ),
       ),

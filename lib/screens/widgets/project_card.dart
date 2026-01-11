@@ -49,21 +49,16 @@ class _ProjectCardState extends State<ProjectCard> {
                 ? (Matrix4.identity()..translate(0, -10, 0)..scale(1.025)) 
                 : Matrix4.identity(),
             decoration: BoxDecoration(
-              color: AppColors.accentDeep.withOpacity(0.9),
+              color: AppColors.primaryDark,
               borderRadius: BorderRadius.circular(15),
               boxShadow: _isHovered && !isMobile
                 ? [
                     BoxShadow(
-                      color: AppColors.primaryGold.withOpacity(0.4), // ใช้สีทองจางๆ 
+                      color: AppColors.echoesBright.withOpacity(0.3), // ใช้สีทองจางๆ 
                       blurRadius: 20,
-                      spreadRadius: 5, // เพิ่มรัศมีการกระจายเพื่อให้เห็นเงาแม้พื้นหลังสว่าง
+                      spreadRadius: 2, 
                       offset: const Offset(0, 10),
                     ),
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3), // เพิ่มเงาสีดำซ้อนอีกชั้นเพื่อความคมชัด
-                      blurRadius: 10,
-                      spreadRadius: -2,
-                    )
                   ]
                 : [],
             ),
@@ -77,7 +72,7 @@ class _ProjectCardState extends State<ProjectCard> {
                       widget.project.image,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
-                        color: AppColors.purpleDark,
+                        color: AppColors.bgGreenDark,
                         child: const Icon(Icons.image_not_supported, color: Colors.white24),
                       ),
                     ),
@@ -87,7 +82,7 @@ class _ProjectCardState extends State<ProjectCard> {
                   Positioned.fill(
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
-                      opacity: isMobile ? 0.8 : (_isHovered ? 0.9 : 0.4),
+                      opacity: isMobile ? 0.85 : (_isHovered ? 0.95 : 0.4),
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -95,11 +90,11 @@ class _ProjectCardState extends State<ProjectCard> {
                             end: Alignment.bottomCenter,
                             colors: [
                               Colors.transparent,
-                              AppColors.purpleDark.withOpacity(0.4), // เริ่มเข้มจากกลางภาพ
-                              AppColors.purpleDark.withOpacity(0.9), // เข้มมากตรงส่วนล่าง
+                              AppColors.bgGreenDark.withOpacity(0.5), // เริ่มเข้มจากกลางภาพ
+                              AppColors.bgGreenDark.withOpacity(0.9), // เข้มมากตรงส่วนล่าง
                               Colors.black,
                             ],
-                            stops: const [0.0, 0.4, 0.8, 1.0],
+                            stops: const [0.0, 0.3, 0.7, 1.0],
                           ),
                         ),
                       ),
@@ -118,12 +113,17 @@ class _ProjectCardState extends State<ProjectCard> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryGold,
+                            color: AppColors.soundPurple,
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             widget.project.category,
-                            style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                              color: Colors.white, 
+                              fontSize: 10, 
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.1,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -173,10 +173,17 @@ class _ProjectCardState extends State<ProjectCard> {
                                       children: widget.project.tags.map<Widget>((tag) => Container(
                                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white30),
+                                          border: Border.all(color: AppColors.greenBorder),
                                           borderRadius: BorderRadius.circular(4),
                                         ),
-                                        child: Text(tag, style: const TextStyle(color: Colors.amberAccent, fontSize: 10)),
+                                        child: Text(
+                                          tag, 
+                                          style: const TextStyle(
+                                            color: AppColors.echoesBright, 
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            )
+                                          ),
                                       )).toList(),
                                     ),
                                   ],

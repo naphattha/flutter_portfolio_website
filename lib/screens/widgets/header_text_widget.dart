@@ -24,7 +24,7 @@ class HeaderTextWidget extends StatelessWidget {
           TextWidget(
                 sSize: size,
                 text: "I am Naphattha Chinaksorn",
-                color: AppColors.primaryGold,
+                color: AppColors.echoesBright,
                 size: 26,
                 fw: FontWeight.bold,
                 alignment: size.width > 600 ? TextAlign.start : TextAlign.center,
@@ -35,16 +35,17 @@ class HeaderTextWidget extends StatelessWidget {
             text1: "Flutter Developer",
             text2: "Mobile App Developer",
           ),
+          const SizedBox(height: 10),
 
           SizedBox(
-            width: size.width * 0.5,
+            width: size.width > 600 ? size.width * 0.5 : size.width * 0.9,
             child:  TextWidget(
                 sSize: size,
                 alignment: size.width > 600 ? TextAlign.start : TextAlign.center,
                 text:
                      "A Computer Science graduate with a passion for building high-quality, secure mobile applications. Leveraging my experience in QA and Data Analysis to deliver exceptional user experiences.",
                 size: 16,
-                color: Colors.white,
+                color: Colors.white70,
                 fw: FontWeight.normal),
             )
           ],

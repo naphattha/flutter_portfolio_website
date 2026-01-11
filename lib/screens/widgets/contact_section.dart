@@ -20,14 +20,14 @@ class ContactSection extends StatelessWidget {
     return Container(
       width: size.width,
       padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 20),
-      color: AppColors.purpleDark, // สีพื้นหลังหลักของคุณ
+      color: AppColors.bgGreenDark, // สีพื้นหลังหลักของคุณ
       child: Column(
         children: [
           // หัวข้อเล็กๆ
           Text(
             "Get In Touch",
             style: TextStyle(
-              color: AppColors.primaryGold,
+              color: AppColors.echoesBright,
               fontSize: 28,
               fontWeight: FontWeight.bold,
               letterSpacing: 1.2,
@@ -68,7 +68,7 @@ class ContactSection extends StatelessWidget {
           const SocialWidget(),
 
           const SizedBox(height: 40),
-          const Divider(color: Colors.white10, indent: 50, endIndent: 50),
+          Divider(color: AppColors.echoesBright.withOpacity(0.1), indent: 50, endIndent: 50),
           const SizedBox(height: 20),
 
           // Footer เล็กๆ
@@ -90,17 +90,19 @@ class ContactSection extends StatelessWidget {
   }) {
     return InkWell(
       onTap: onTap,
+      hoverColor: AppColors.primaryGreen.withOpacity(0.1),
       borderRadius: BorderRadius.circular(10),
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Icon(icon, color: AppColors.primaryGold, size: 24),
+            Icon(icon, color: AppColors.echoesBright, size: 24),
             const SizedBox(height: 8),
             Text(
               label,
               style: const TextStyle(color: Colors.white70, fontSize: 12),
             ),
+            const SizedBox(height: 4),
             Text(
               value,
               style: const TextStyle(

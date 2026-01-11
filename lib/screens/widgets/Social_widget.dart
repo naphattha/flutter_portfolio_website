@@ -66,17 +66,15 @@ class _SocialIconItemState extends State<SocialIconItem> {
         duration: const Duration(milliseconds: 200),
         height: 40,
         width: 40,
-        // เพิ่ม Transform Effect ตามที่คุณต้องการ
         transform: _isHovered
-            ? (Matrix4.identity()..scale(1.1)) // ขยายขึ้น 10% (ปรับเป็น 1.05 ได้ครับ)
+            ? (Matrix4.identity()..scale(1.1)) // ขยายขึ้น 10%
             : Matrix4.identity(),
-        // สำคัญ: ต้องระบุ Alignment ให้ขยายออกจากจุดศูนย์กลาง
         transformAlignment: Alignment.center, 
         decoration: BoxDecoration(
-          color: _isHovered ? AppColors.gray600.withOpacity(0.2) : Colors.transparent,
+          color: _isHovered ? AppColors.soundPurple.withOpacity(0.15) : Colors.transparent,
           shape: BoxShape.circle,
           border: Border.all(
-            color: _isHovered ? AppColors.primaryGold : AppColors.gray100,
+            color: _isHovered ? AppColors.echoesBright : AppColors.gray100.withOpacity(0.3),
             width: _isHovered ? 2 : 1,
           ),
         ),
@@ -87,7 +85,7 @@ class _SocialIconItemState extends State<SocialIconItem> {
             onPressed: () => _launchURL(widget.url),
             icon: FaIcon(
               widget.icon,
-              color: _isHovered ? AppColors.primaryGold : AppColors.gray100,
+              color: _isHovered ? AppColors.echoesBright : AppColors.gray100,
               size: 15,
             ),
           ),

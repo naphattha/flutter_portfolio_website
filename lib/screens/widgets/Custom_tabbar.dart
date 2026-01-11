@@ -11,13 +11,13 @@ class CustomTabbar extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size=MediaQuery.of(context).size;
     bool isMobile = size.width < 600;
-    bool isTablet = size.width < 1024;
+    bool isTablet = size.width >= 600 && size.width < 1024;
 
     return Container(
-      width: isMobile ? size.width * 0.7 : (isTablet?size.width * 0.6:size.width * 0.4),
+      width: isMobile ? size.width * 0.8 : (isTablet?size.width * 0.8:size.width * 0.6),
       decoration: BoxDecoration(
-        border: Border.all(color:Colors.amber),
-          color: AppColors.purpleDark,
+        border: Border.all(color:AppColors.echoesBright.withOpacity(0.5)),
+          color: AppColors.primaryDark.withOpacity(0.5),
           borderRadius: BorderRadius.circular(isMobile ? 12 : 20)
         ),
         child: TabBar(
@@ -31,14 +31,15 @@ class CustomTabbar extends StatelessWidget {
             Tab(text: "Other",),
           ],
           indicator: BoxDecoration(
-            color: AppColors.purpleSoft,
+            color: AppColors.echoesBright,
             borderRadius: BorderRadius.circular(20),
           ),
           indicatorSize: TabBarIndicatorSize.tab,
           labelStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
-          labelColor: AppColors.gray100,
-          unselectedLabelColor: AppColors.gray600,
-          labelPadding: EdgeInsets.symmetric(horizontal: 20),
+          labelColor: AppColors.primaryDark,
+          unselectedLabelColor: Colors.white60,
+          labelPadding: const EdgeInsets.symmetric(horizontal: 20),
+          dividerColor: Colors.transparent,
         ),
       );
   }
@@ -51,32 +52,12 @@ class CustomTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    bool isMobile = size.width < 600;
-
-    // หากเป็น Mobile ให้ใช้ Column เพื่อให้ไหลตาม Scroll หลัก
-    if (isMobile) {
-      return AnimatedBuilder(
-        animation: tabController,
-        builder: (context, child) {
-          // เลือกดึงข้อมูลตาม Index ที่ TabController เลือกอยู่
-          String currentCategory = _getCategoryByIndex(tabController.index);
-          return Allprojects(size: size, categoryFilter: currentCategory);
-        },
-      );
-    }
-
-    // หากเป็น Desktop ให้ใช้ TabBarView เหมือนเดิม
-    return SizedBox(
-      height: size.height * 0.8,
-      child: TabBarView(
-        controller: tabController,
-        children: [
-          Allprojects(size: size, categoryFilter: "All"),
-          Allprojects(size: size, categoryFilter: "Web"),
-          Allprojects(size: size, categoryFilter: "Mobile"),
-          Allprojects(size: size, categoryFilter: "Other"),
-        ],
-      ),
+    return AnimatedBuilder(
+      animation: tabController,
+      builder: (context, child) {
+        String currentCategory = _getCategoryByIndex(tabController.index);
+        return Allprojects(size: size, categoryFilter: currentCategory);
+      },
     );
   }
 
@@ -100,6 +81,7 @@ class Allprojects extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isMobile = size.width < 600;
+    bool isTablet = size.width >= 600 && size.width < 1024;
 
     // กรองข้อมูล: ถ้าเลือก 'All' ให้เอาหมด ถ้าไม่ใช่ให้เอาเฉพาะที่ตรงหมวด
     List<Project> filteredProjects = categoryFilter == "All" 
@@ -107,19 +89,20 @@ class Allprojects extends StatelessWidget {
         : myProjectsData.where((p) => p.category == categoryFilter).toList();
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: size.width < 600 ? 15 : size.width * 0.1),
+      margin: EdgeInsets.symmetric(horizontal: size.width < 600 ? 15 : size.width * 0.05),
       padding: EdgeInsets.all(isMobile? 10 : 20),
       child: filteredProjects.isEmpty 
-        ? const Center(child: Text("No projects found")) // กรณีไม่มีโปรเจกต์ในหมวดนั้น
+        ? const Center(child: Text("No projects found",
+                style: TextStyle(color: Colors.white70),)) // กรณีไม่มีโปรเจกต์ในหมวดนั้น
         : GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: filteredProjects.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: size.width < 600 ? 1 : (size.width < 1024 ? 2 : 3),
-              mainAxisSpacing: 15,
+              crossAxisCount: isMobile? 1 : (isTablet ? 2 : 3),
+              mainAxisSpacing: 20,
               crossAxisSpacing: 20,
-              childAspectRatio: isMobile ? 1.5 : 1.1,
+              childAspectRatio: isMobile ? 1.2 : (isTablet ? 1.1 : 1.3),
             ),
             itemBuilder: (context, index) {
               return ProjectCard(project: filteredProjects[index]);

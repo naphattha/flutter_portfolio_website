@@ -1,41 +1,38 @@
 import 'package:flutter/material.dart';
 
-class AppColors{
-  // Primary & Accent Colors (Inspired by Golden Experience & Pink Suit)
-  
-  // PRIMARY COLOR: สีทอง/เหลืองสดใส (Golden Experience)
-  static const Color primaryGold = Color(0xFFFFD700); // FFD700 คือรหัสสีทองมาตรฐาน
-  static const Color primaryLight = Color(0xFFFFF8E1); // สีเหลืองอ่อนสำหรับพื้นหลังสว่าง
-  static const Color primaryDark = Color(0xFFC7A700); // สีทองเข้มสำหรับ Shadow/Hover
+class AppColors {
+  // PRIMARY COLORS
+  static const Color primaryGreen = Color(0xFF00695C); // เขียวเข้ม
+  static const Color primaryLight = Color(0xFFE8F5E9); // เขียวอ่อนมากสำหรับพื้นหลังสว่าง
+  static const Color primaryDark = Color(0xFF004D40);  // เขียวเข้มจัดสำหรับ Shadow/Hover
 
-  // ACCENT COLOR: สีชมพูอมม่วง/แดง (Ladybug Brooch / Suit)
-  static const Color accentPink = Color(0xFFF06292); // โทนชมพูสดใส
-  static const Color accentDeep = Color(0xFFC2185B); // โทนแดงเข้ม/ม่วงเข้ม
+  // ACCENT COLORS
+  static const Color echoesBright = Color(0xFF00E676); // เขียวสว่าง
+  static const Color soundPurple = Color(0xFF6A1B9A);  // สีม่วง
+  static const Color soundDeepPurple = Color(0xFF4A148C); // ม่วงเข้มสำหรับเน้นจุดสำคัญ
 
-  // BACKGROUND & TEXT COLORS (Backgrounds should be simple to make Gold/Pink stand out)
+  // BACKGROUND & SECTION COLORS
+  static const Color bgGreenDark = Color(0xFF1B2E1B);
+  static const Color bgGreenMid = Color(0xFF2E3D2E);
+  static const Color bgGreenSoft = Color(0xFF3D4D3D);
 
-  // PURPLE BACKGROUND (Golden Experience Aura)
-  static const Color purpleDark = Color(0xFF1A102C);   // ม่วงดำลึก (Hero / Footer)
-  static const Color purpleMid = Color(0xFF2B1B3F);    // ม่วงเข้ม (Section)
-  static const Color purpleSoft = Color(0xFF3A2A52);   // ม่วงอ่อน (Card bg)
-
-  // TEXT COLOR: สีตัวอักษร
-  static const Color textDark = Color(0xFF212121);   // สีดำสนิท
+  // TEXT COLORS
+  static const Color textDark = Color(0xFF121212);   // สีดำสนิท
   static const Color textLight = Color(0xFFFFFFFF);  // สีขาว
 
-  // SPECIAL (Hover, Button States)
-  static const Color hoverEffect = primaryDark; // ใช้สีทองเข้มเมื่อเมาส์ชี้
+  // SPECIAL (States & CTA)
+  static const Color hoverEffect = echoesBright;     // ใช้เขียวสว่างเมื่อเมาส์ชี้
   
-  // CTA GOLD
-  static const Color goldCTA = Color(0xFFFFD54F);   // ทองสว่าง (ปุ่ม)
-  static const Color goldCTADark = Color(0xFFC9A000); // ทองเข้ม (icon / hover)
-  static const Color goldBorder = Color(0x66FFD700); // ขอบทองโปร่ง
+  // CTA GREEN (ปุ่มที่ต้องการให้เด่น)
+  static const Color greenCTA = Color(0xFF00C853);   // เขียวสด (ปุ่ม)
+  static const Color greenCTADark = Color(0xFF008A3B); // เขียวเข้ม (icon / hover)
+  static const Color greenBorder = Color(0x6600E676); // ขอบเขียวโปร่ง
 
-  static const Color purpleCTA = Color(0xFF2F1E45);
-  static const Color purpleBorder = Color(0x44FFD700);
+  static const Color purpleCTA = soundPurple;
+  static const Color koichiBorder = Color(0x4400E676);
 
-  static const Color gray100 = Color(0xFFF5F5F5); // Headline รอง
-  static const Color gray200 = Color(0xFFE0E0E0); // Body text
-  static const Color gray400 = Color(0xFFBDBDBD); // Caption / Hint
-  static const Color gray600 = Color(0xFF757575); // Disabled / Subtle
+  static const Color gray100 = Color(0xFFF5F5F5); 
+  static const Color gray200 = Color(0xFFE0E0E0); 
+  static const Color gray400 = Color(0xFFBDBDBD); 
+  static const Color gray600 = Color(0xFF757575); 
 }

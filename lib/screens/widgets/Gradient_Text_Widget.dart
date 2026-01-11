@@ -30,11 +30,11 @@ class GradientTextWidget extends StatelessWidget {
       textAlign: size.width < 600 && alignment != null ? alignment : null,
       "${text1}\n${text2??""}",
       colors: [
-        AppColors.accentPink,
-        AppColors.accentDeep,
+        AppColors.greenBorder,
+        AppColors.echoesBright,
       ],
       style: GoogleFonts.montserrat(
-          fontSize: size.width * 0.040,
+          fontSize: size.width < 600 ? 30 : size.width * 0.040,
           fontWeight: FontWeight.bold),
     );
   }

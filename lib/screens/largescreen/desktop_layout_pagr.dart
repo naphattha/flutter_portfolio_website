@@ -109,15 +109,15 @@ class _DesktopLayoutState extends State<DesktopLayout> with SingleTickerProvider
                   
                   Container(
                     key: _servicesKey,
-                    color: AppColors.purpleDark,
+                    color: AppColors.bgGreenDark,
                     padding: EdgeInsets.symmetric(vertical: size.width*0.05),
                     child: Column(
                       children: [
                         GradientText( "My Professional Focus", colors: [
-                          AppColors.goldBorder,
-                          AppColors.primaryGold,
+                          AppColors.greenBorder,
+                          AppColors.echoesBright,
                         ],
-                      style: GoogleFonts.montserrat(
+                        style: TextStyle(
                           fontSize: size.width * 0.030,
                           fontWeight: FontWeight.bold),
                         ),
