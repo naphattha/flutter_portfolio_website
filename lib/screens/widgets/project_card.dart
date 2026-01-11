@@ -232,20 +232,19 @@ class Project {
 List<Project> myProjectsData = [
   // --- MOBILE SECTION (In Progress) ---
   Project(
-    title: "E-Commerce App",
+    title: "To-do App (Under Development)",
     category: "Mobile",
-    tags: ["Flutter", "Firebase", "Stripe"],
-    image: "assets/images/project1.png",
-    description: "Full-stack mobile commerce solution (Under Development).",
+    tags: ["Flutter", "Firebase"],
+    image: "assets/images/to_do.png",
+    description: "Full-stack mobile To-do App (Under Development).",
     projectUrl: "https://github.com/naphattha",
   ),
-
   // --- WEB SECTION ---
   Project(
     title: "Portfolio Website",
     category: "Web",
-    tags: ["Flutter Web", "Responsive", "Glassmorphism"],
-    image: "assets/images/project1.png", // เปลี่ยนที่อยู่รูปตามจริง
+    tags: ["Flutter Web", "Responsive"],
+    image: "assets/images/portfolio_website_mobile.png", 
     description: "Personal portfolio built with Flutter Web featuring smooth animations and sticky navigation.",
     projectUrl: "https://github.com/naphattha/flutter_portfolio_website",
   ),
@@ -254,8 +253,8 @@ List<Project> myProjectsData = [
     title: "LLM-RAG Financial QA",
     category: "Other",
     tags: ["Python", "Neo4j", "SQL", "LLM"],
-    image: "assets/images/project1.png", // แนะนำให้ใช้รูป Graph Database สวยๆ
+    image: "assets/images/project1.png",
     description: "Financial Knowledge Graph & RAG-powered chatbot for SET50 data analysis using Neo4j and MySQL.",
-    projectUrl: "https://github.com/naphattha", // ใส่ลิงก์ Github ของโปรเจกต์นี้
+    projectUrl: "https://github.com/naphattha",
   ),
 ];
